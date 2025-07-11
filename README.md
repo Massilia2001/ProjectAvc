@@ -11,27 +11,19 @@ Ce projet est une application web complète développée en Python (Flask), perm
 - Ajouter, modifier ou supprimer des patients
 - Connecter et insérer les données dans une base PostgreSQL (gestion via pgAdmin)
 - Introduire une modélisation prédictive (Machine Learning) pour estimer le risque d’AVC
-- Prédire le risque d'AVC à l’aide d’un formulaire dynamique, dont les champs sont validés côté client (HTML) et côté serveur (Flask)
 
-L'application web est développée avec **Flask** et connectée à **PostgreSQL**.  
-L'analyse exploratoire et les visualisations sont réalisées dans un **notebook Jupyter**.  
-Le design est modernisé avec **Bootstrap** pour une interface claire, responsive et conviviale.
-
-> Le modèle utilisé pour la prédiction est un **Random Forest Classifier**, entraîné sur les variables cliniques et démographiques du patient à partir des données nettoyées.
-
+L'application web est développée avec Flask et connectée à PostgreSQL.  
+L'analyse exploratoire et les visualisations sont réalisées dans un notebook Jupyter.  
+Le design est modernisé avec Bootstrap pour une interface claire et responsive.
 
 # 2. Objectif
 
-L'objectif principal de ce projet est de concevoir une **application web interactive** qui permet d'exploiter un dataset médical réel sur les **Accidents Vasculaires Cérébraux (AVC)**, afin de :
-
-- Analyser les données du dataset **healthcare-dataset-stroke-data.csv** (provenant de Kaggle) via un **notebook Jupyter** (nettoyage, traitement, visualisation)
-- Stocker les données nettoyées dans une **base PostgreSQL**
-- Interagir avec les données via une interface web développée avec **Flask** (ajout, modification, suppression, filtrage, export PDF/CSV)
-- Visualiser les relations entre différentes variables médicales et sociodémographiques grâce à **Seaborn** et **Matplotlib**
-- Prédire le risque d’AVC pour un patient donné à l’aide d’un **modèle de Machine Learning** intégré à l’application
-
-> Ce projet combine **analyse de données**, **développement web**, **base de données** et **intelligence artificielle** dans une application unifiée.
-
+L'objectif principal de ce projet est avant tout l'analyse d'un dataset médical 
+Analyser un dataset médical (AVC - Accidents Vasculaires Cérébraux) intitulé **healthcare-dataset-stroke-data.csv** et créer une **application web** qui a pour but de :
+- Analyse les données issues du Dataset téléchargé sous Jupyter (Nettoyage, Visualisation)
+- Stockage des données dans une base PostgreSQL
+- Interface web avec Flask (Ajout, Filtrage, Export CSV/PDF)
+- Visualisations avec Seaborn et Matplotlib
 
 # 3. Structure du projet
 
@@ -39,11 +31,10 @@ stroke-project/
 │
 ├── app_flask/ # Application Flask (fichiers Python et templates HTML)
 │ ├── projet.py # Fichier principal Flask (routes, logique web)
-│ ├── templates/ # Fichiers HTML (index, ajout, modification, prédiction)
+│ ├── templates/ # Fichiers HTML (index, ajout, modification)
 │ │ ├── index.html
 │ │ ├── add_patient.html
-│ │ ├── edit_patient.html
-│ │ └── predict.html          
+│ │ └── edit_patient.html
 │
 ├── Data/ # Données sources (healthcare-dataset-stroke-data.csv)
 │
@@ -58,13 +49,10 @@ stroke-project/
 │ ├── Tabagisme.png
 │ ├── type-de-travail.png
 │ ├── relationGlucoseIMCAVG.PNG
-│ ├── MatriceDeConfusion.png
-│ └── prediction.png          
+│ └── MatriceDeConfusion.png
 │
 ├── requirements.txt # Liste des dépendances Python
 └── README.md # Documentation du projet (ce fichier)
-
-
 # 4. Technologies utilisées
 
 - **Python** 
@@ -86,29 +74,26 @@ stroke-project/
 
 - Python 3.13.2
 - PostgreSQL installé et configuré (via pgAdmin)
-- Dataset téléchargé depuis Kaggle (healthcare-dataset-stroke-data.csv)
+- Dataset téléchargé depuis Kaggle (`healthcare-dataset-stroke-data.csv`)
 
-## Installation effectuées
+## Installation
 
 
 # Cloner le dépôt
-git clone https://github.com/Massilia/ton-depot.git
+git clone https://github.com/Massilia2001/ProjectAvc.git
 cd stroke-project
 
 # Installer les dépendances
 pip install -r requirements.txt
 
 # Configuration de la base PostgreSQL
-    
-    Lancer pgAdmin 
+
     Créer une base stroke_db via pgAdmin
-    Créer la table patients avec la structure définie dans le notebook (Untitled7.ipynb) ou dans le code Flask (projet.py)
-    Vérifier que la connexion PostgreSQL dans projet.py correspond à vos identifiants et port (host, user, password, dbname, etc.)
+
+    Créer la table patients avec la structure définie dans le notebook ou dans le code Flask
 
 # Lancer l'application Flask
 python app_flask/projet.py
-L'application sera accessible localement à l’adresse :
- http://127.0.0.1:5000
 
 # Notebook
 
@@ -132,10 +117,6 @@ Voici quelques captures d'écran de l'application pour illustrer son interface e
 ## Formulaire de modification d'un patient
 
 ![Modification patient](screenshoots/Edit.png)
-
-## Formulaire de prédiction 
-
-![prédiction AVC](screenshoots/Prediction.PNG)
 
 ##  Notebook (Les visualisations)
 
@@ -162,7 +143,7 @@ Voici quelques exemples de visualisations générées dans le notebook :
 
 ![Matrice de confusion](screenshoots/MatriceDeConfusion.png)
 
- **D'autres visualisations et analyses détaillées sont disponibles dans le notebook complet (notebooks/Untitled7.ipynb).**
+ **D'autres visualisations et analyses détaillées sont disponibles dans le notebook complet (`notebooks/Untitled7.ipynb`).**
 
 
  # 7. Auteur & Contexte
@@ -171,6 +152,8 @@ Ce projet a été réalisé dans le cadre du module **"Outils libres pour le dé
 
 -  **Auteur** : Massilia Oumaza
 -  **Formation** : Master 1 Informatique parcours Big Data et fouille de données
--  **Université** :  IED Université Paris 8
+-  **Université** :  IED_ Université Paris 8
 -  **Date** : 01 juillet 2025
+
+
 
