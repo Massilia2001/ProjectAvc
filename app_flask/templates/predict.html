@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Prédire un AVC</title>
+    <!-- Inclusion de Bootstrap 5 pour le style -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Prédire le risque d'AVC</h2>
+
+    <!-- Affichage des messages flash (succès, erreur, etc.) -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- Formulaire pour saisir les données utilisateur -->
+    <form method="post">
+        <div class="row g-3">
+            <!-- Champ : Âge -->
+            <div class="col-md-4">
+                <label class="form-label">Âge *</label>
+                <input type="number" name="age" class="form-control" required>
+            </div>
+
+            <!-- Champ : Glucose moyen -->
+            <div class="col-md-4">
+                <label class="form-label">Glucose moyen *</label>
+                <input type="number" step="0.1" name="avg_glucose_level" class="form-control" required>
+            </div>
+
+            <!-- Champ : BMI -->
+            <div class="col-md-4">
+                <label class="form-label">BMI *</label>
+                <input type="number" step="0.1" name="bmi" class="form-control" required>
+            </div>
+
+            <!-- Champ : Hypertension -->
+            <div class="col-md-4">
+                <label class="form-label">Hypertension *</label>
+                <select name="hypertension" class="form-select" required>
+                    <option value="non">Non</option>
+                    <option value="oui">Oui</option>
+                </select>
+            </div>
+
+            <!-- Champ : Maladie cardiaque -->
+            <div class="col-md-4">
+                <label class="form-label">Cardiaque *</label>
+                <select name="heart_disease" class="form-select" required>
+                    <option value="non">Non</option>
+                    <option value="oui">Oui</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Boutons du formulaire -->
+        <div class="col-12 mt-3 d-flex justify-content-between">
+            <!-- Bouton pour retourner à la page d'accueil -->
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">← Retour</a>
+            <!-- Bouton pour soumettre le formulaire -->
+            <button type="submit" class="btn btn-primary">Prédire</button>
+        </div>
+    </form>
+</div>
+
+<!-- Scripts Bootstrap (JS) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

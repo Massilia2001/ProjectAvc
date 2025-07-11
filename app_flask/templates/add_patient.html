@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un Patient</title>
+    <!-- Lien Bootstrap pour le style -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-4">
+    <!-- Titre principal -->
+    <h2 class="text-center mb-4">Ajouter un Patient</h2>
+
+    <!-- Messages flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- Formulaire d'ajout d'un nouveau patient -->
+    <form method="post" action="{{ url_for('add_patient') }}">
+        <div class="row g-3">
+            <!-- Genre -->
+            <div class="col-md-3">
+                <label for="gender" class="form-label">Genre *</label>
+                <select class="form-select" id="gender" name="gender" required>
+                    <option value="">-- Sélectionner --</option>
+                    <option value="male">Homme</option>
+                    <option value="female">Femme</option>
+                </select>
+            </div>
+
+            <!-- Âge -->
+            <div class="col-md-3">
+                <label for="age" class="form-label">Âge *</label>
+                <input type="number" class="form-control" id="age" name="age" min="0" max="120" required>
+            </div>
+
+            <!-- Hypertension -->
+            <div class="col-md-3">
+                <label for="hypertension" class="form-label">Hypertension *</label>
+                <select class="form-select" id="hypertension" name="hypertension" required>
+                    <option value="non" selected>Non</option>
+                    <option value="oui">Oui</option>
+                </select>
+            </div>
+
+            <!-- Maladie cardiaque -->
+            <div class="col-md-3">
+                <label for="heart_disease" class="form-label">Maladie cardiaque *</label>
+                <select class="form-select" id="heart_disease" name="heart_disease" required>
+                    <option value="non" selected>Non</option>
+                    <option value="oui">Oui</option>
+                </select>
+            </div>
+
+            <!-- Type de travail -->
+            <div class="col-md-4">
+                <label for="work_type" class="form-label">Travail *</label>
+                <select class="form-select" id="work_type" name="work_type" required>
+                    <option value="">-- Sélectionner --</option>
+                    <option value="private">Privé</option>
+                    <option value="self-employed">Indépendant</option>
+                    <option value="govt_job">Fonctionnaire</option>
+                    <option value="children">Enfant</option>
+                    <option value="Never_worked">Jamais travaillé</option>
+                </select>
+            </div>
+
+            <!-- Résidence -->
+            <div class="col-md-4">
+                <label for="residence_type" class="form-label">Résidence *</label>
+                <select class="form-select" id="residence_type" name="residence_type" required>
+                    <option value="">-- Sélectionner --</option>
+                    <option value="Urban">Urbain</option>
+                    <option value="Rural">Rural</option>
+                </select>
+            </div>
+
+            <!-- AVC -->
+            <div class="col-md-4">
+                <label for="stroke" class="form-label">AVC *</label>
+                <select class="form-select" id="stroke" name="stroke" required>
+                    <option value="oui" selected>Oui</option>
+                    <option value="non">Non</option>
+                </select>
+            </div>
+
+            <!-- Boutons -->
+            <div class="col-12 mt-3 d-flex justify-content-between">
+                <!-- Bouton retour -->
+                <a href="{{ url_for('index') }}" class="btn btn-secondary">← Retour à la liste</a>
+                <!-- Bouton valider -->
+                <button type="submit" class="btn btn-success">Ajouter</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Script de validation supplémentaire -->
+<script>
+document.querySelector("form").addEventListener("submit", function (e) {
+    const age = parseInt(document.getElementById("age").value);
+    const work = document.getElementById("work_type").value;
+
+    if (age < 0 || age > 120 || isNaN(age)) {
+        alert("L'âge doit être un nombre entre 0 et 120.");
+        e.preventDefault();
+        return;
+    }
+
+    if (work === "children" && age > 18) {
+        alert("Un enfant ne peut pas avoir plus de 18 ans.");
+        e.preventDefault();
+        return;
+    }
+});
+</script>
+
+<!-- Script Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier un Patient</title>
+    <!-- Lien Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-4">
+    <!-- Titre de la page -->
+    <h2 class="text-center mb-4">Modifier le Patient #{{ patient[0] }}</h2>
+
+    <!-- Bloc pour les messages flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- Formulaire de modification du patient -->
+    <form method="post">
+        <div class="row g-3">
+            <!-- Genre -->
+            <div class="col-md-3">
+                <label class="form-label">Genre *</label>
+                <select class="form-select" name="gender" required>
+                    <option value="male" {{ 'selected' if patient[1] == 'male' else '' }}>Homme</option>
+                    <option value="female" {{ 'selected' if patient[1] == 'female' else '' }}>Femme</option>
+                </select>
+            </div>
+
+            <!-- Âge -->
+            <div class="col-md-3">
+                <label class="form-label">Âge *</label>
+                <input type="number" name="age" class="form-control" value="{{ patient[2] }}" required>
+            </div>
+
+            <!-- Hypertension -->
+            <div class="col-md-3">
+                <label class="form-label">Hypertension *</label>
+                <select name="hypertension" class="form-select" required>
+                    <option value="oui" {{ 'selected' if patient[3] else '' }}>Oui</option>
+                    <option value="non" {{ 'selected' if not patient[3] else '' }}>Non</option>
+                </select>
+            </div>
+
+            <!-- Maladie cardiaque -->
+            <div class="col-md-3">
+                <label class="form-label">Cardiaque *</label>
+                <select name="heart_disease" class="form-select" required>
+                    <option value="oui" {{ 'selected' if patient[4] else '' }}>Oui</option>
+                    <option value="non" {{ 'selected' if not patient[4] else '' }}>Non</option>
+                </select>
+            </div>
+
+            <!-- Type de travail -->
+            <div class="col-md-4">
+                <label class="form-label">Travail *</label>
+                <select name="work_type" class="form-select" required>
+                    {% set work = patient[5] %}
+                    {% for val, label in [('private', 'Privé'), ('self-employed', 'Indépendant'), ('govt_job', 'Fonctionnaire'), ('children', 'Enfant'), ('Never_worked', 'Jamais travaillé')] %}
+                        <option value="{{ val }}" {{ 'selected' if work == val else '' }}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Résidence -->
+            <div class="col-md-4">
+                <label class="form-label">Résidence *</label>
+                <select name="residence_type" class="form-select" required>
+                    <option value="Urban" {{ 'selected' if patient[6] == 'Urban' else '' }}>Urbain</option>
+                    <option value="Rural" {{ 'selected' if patient[6] == 'Rural' else '' }}>Rural</option>
+                </select>
+            </div>
+
+            <!-- AVC -->
+            <div class="col-md-4">
+                <label class="form-label">AVC *</label>
+                <select name="stroke" class="form-select" required>
+                    <option value="oui" {{ 'selected' if patient[7] else '' }}>Oui</option>
+                    <option value="non" {{ 'selected' if not patient[7] else '' }}>Non</option>
+                </select>
+            </div>
+
+            <!-- Boutons -->
+            <div class="col-12 mt-3 d-flex justify-content-between">
+                <!-- Bouton retour -->
+                <a href="{{ url_for('index') }}" class="btn btn-secondary">← Retour</a>
+                <!-- Bouton mise à jour -->
+                <button type="submit" class="btn btn-primary">💾 Mettre à jour</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
+
